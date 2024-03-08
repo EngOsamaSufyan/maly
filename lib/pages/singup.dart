@@ -1,5 +1,8 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:maly/pages/loginpage.dart';
 import 'buttom_navegetor_bar.dart';
 
 class Signup extends StatelessWidget {
@@ -16,7 +19,7 @@ class Signup extends StatelessWidget {
           scrollDirection: Axis.vertical,
           child: Column(
           children: <Widget> [
-          const SizedBox(height: 10),
+          const SizedBox(height: 40),
 
           Image.asset('assets/images/logo.png',
           width: 250, height: 150,
@@ -136,15 +139,73 @@ class Signup extends StatelessWidget {
           ),
           ),
           ),
-          const SizedBox(height: 45,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                MaterialButton (
+                  onPressed: () {
+                    // Add your button action here
+                  },
+                  child: Icon(Icons.credit_card),
+                ),
+                Text('Front Card',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+                MaterialButton (
+                  onPressed: () {
+                    // Add your button action here
+                  },
+                  child: Icon(Icons.credit_card_outlined),
+                ),
+                Text('Back Card',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                MaterialButton (
+                  onPressed: () {
+                    // Add your button action here
+                  },
+                  child: Icon(Icons.camera),
+                ),
+                Text('Selfy',
+                  style: TextStyle(
+                    color: Colors.grey,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+
+
+
+
+              ],
+            ),
+
+
+           SizedBox(height: 45,),
           MaterialButton(
           elevation: 5.0,
           color: Colors.green,
-          padding: const EdgeInsets.symmetric(
-          vertical: 20,
+          padding:  EdgeInsets.symmetric(
+          vertical: 10,
           horizontal: 80
           ),
-          child: const Text('Create Account',
+          child:  Text('Create Account',
           style: TextStyle(
           color: Colors.white,
           fontSize: 23,
@@ -155,18 +216,33 @@ class Signup extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
           borderSide: BorderSide.none
           ),
-          onPressed: (){
-          Navigator.of(context).push(MaterialPageRoute(builder: (context){
-          return  ButtomBarPages();
-          }));
-          }
+            onPressed: () async {
+              showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+
+                    content: Icon(Icons.gpp_good_outlined,
+                    size: 100,
+                      color: Colors.green,
+                    ),
+                  );
+                },
+              );
+              await Future.delayed(Duration(seconds: 1));
+              Navigator.of(context).pop();
+              Get.to(ButtomBarPages());
+            },
           ),
 
             TextButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/');
+               Get.to(LoginScrren());
               },
-              child: Text('Already have an account? Login'),
+              child: Text('Already have an account? Login',style: TextStyle(
+                color: Colors.black,
+
+              ),),
             ),
           ],
         ),

@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:maly/code/verable.dart';
 import 'package:maly/pages/buttom_navegetor_bar.dart';
-
 import 'package:maly/pages/forgetpass.dart';
-import 'package:maly/pages/singup.dart';
+import 'dart:convert';
+import 'package:flutter/services.dart';
 
 
-class LoginScrren extends StatefulWidget {
-  const LoginScrren({super.key});
+class LoginScrren extends StatelessWidget {
+  Malyvarable maly =Get.put(Malyvarable());
+  TextEditingController _accountNumber =TextEditingController();
+  TextEditingController _pass =TextEditingController();
 
-  @override
-  State<LoginScrren> createState() => _LoginScrrenState();
-}
-
-class _LoginScrrenState extends State<LoginScrren> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child:  Scaffold(
@@ -28,16 +27,19 @@ class _LoginScrrenState extends State<LoginScrren> {
           scrollDirection: Axis.vertical,
           child: Column(
             children: <Widget> [
-              const SizedBox(height: 20),
+              const SizedBox(height: 10),
 
               Image.asset('assets/images/logo.png',
-                width: 250, height: 250,
+                width: 200, height: 200,
               ),
               const SizedBox(height: 50,),
               TextField(
+                controller: _accountNumber,
                 decoration: InputDecoration(
-                  hintText: 'User name',
-                  prefixIcon: Icon(Icons.person),
+                  hintText: 'Accaount Number',
+                  prefixIcon: Icon(Icons.person,
+                  color: Colors.orange,
+                  ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius:  BorderRadius.circular(20),
                     borderSide: const BorderSide(
@@ -64,9 +66,12 @@ class _LoginScrrenState extends State<LoginScrren> {
               const SizedBox(height: 20,),
               TextField(
                 obscureText: true,
+                controller: _pass,
                 decoration: InputDecoration(
                   hintText: 'Password',
-                  prefixIcon: Icon(Icons.remove_red_eye),
+                  prefixIcon: Icon(Icons.remove_red_eye,
+                  color: Colors.orange,
+                  ),
                   enabledBorder: OutlineInputBorder(
                     borderRadius:  BorderRadius.circular(20),
                     borderSide: const BorderSide(
@@ -95,8 +100,8 @@ class _LoginScrrenState extends State<LoginScrren> {
                   elevation: 5.0,
                   color: Colors.green,
                   padding: const EdgeInsets.symmetric(
-                      vertical: 20,
-                      horizontal: 80
+                      vertical: 10,
+                      horizontal: 50
                   ),
                   child: const Text('Login',
                     style: TextStyle(
@@ -109,34 +114,75 @@ class _LoginScrrenState extends State<LoginScrren> {
                       borderRadius: BorderRadius.circular(50),
                       borderSide: BorderSide.none
                   ),
-                  onPressed: (){
-                    Get.to(ButtomBarPages());
+                  onPressed: ()async{
+                    String account=_accountNumber.text;
+                    String pass=_pass.text;
+                    if (account==maly.Phone.toString()&& pass==maly.pass)
+                      {
+
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+
+                                content: Icon(Icons.gpp_good_outlined,
+                                  size: 100,
+                                  color: Colors.green,
+                                ),
+                              );
+                            },
+                          );
+                          await Future.delayed(Duration(seconds: 1));
+                          Navigator.of(context).pop();
+                          Get.offAll(ButtomBarPages());
+
+                      }
+                    else{
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+
+                            content:   Icon(Icons.gpp_bad_outlined,
+                            size: 100,
+                            color: Colors.red,
+                          ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context); // Close the dialog
+                                },
+                                child: Text('Cancel'),
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Get.offAll(LoginScrren());
+                                   // Close the dialog
+                                   // Process the bill payment
+                                },
+                                child: Text('ReTry'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
+
                   }
               ),
               const SizedBox(height: 20,),
               GestureDetector(
                 onTap: (){
-                  Get.to(Password());
+                  Get.to(ForgotPasswordPage());
                                  },
                 child: Text('Forget the password'
                     ,style: TextStyle(
-                      color: Colors.blue,
+                      color: Colors.black,
                       fontSize: 20,
                     )
                 ),
               ),
-              const SizedBox(height: 10,),
-              GestureDetector(
-                onTap: (){
-                Get.to(Signup());
-                },
-                child: Text('Create Account'
-                    ,style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 20,
-                    )
-                ),
-              ),
+
             ],
           ),
         ),

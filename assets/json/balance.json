@@ -1,0 +1,18 @@
+{
+    "data": [
+        {
+            "card_name": "Osama Sufyan",
+            "card_number": "735903811",
+            "balance": 7000,
+            "expiry_date": "12/30",
+            "id": "1"
+        },
+        {
+            "card_name": "ammen ali",
+            "card_number": "77566887",
+            "balance": 10000,
+            "expiry_date": "12/25",
+            "id": "2"
+        }
+    ]
+}

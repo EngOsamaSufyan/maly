@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:maly/pages/loginpage.dart';
+import 'package:maly/pages/getstert.dart';
 
 
 
@@ -16,7 +16,7 @@ class Maly extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner:false,
 
-      home:LoginScrren(),
+      home:Start(),
 
     );
   }

@@ -1,0 +1,83 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "osama sufyan",
+            "username": "735903811",
+            "password": "osama",
+            "image": "https://kaitlinzhang.com/wp-content/uploads/2017/03/how-to-take-a-profile-photo-personal-branding-kaitlin-zhang-15-1024x683.jpg"
+        },
+        {
+            "id": 2,
+            "name": "Alice Smith",
+            "username": "alicesmith456",
+            "email": "alice.smith@newtronic.com",
+            "password": "p@ssw0rd",
+            "image": "https://writestylesonline.com/wp-content/uploads/2016/08/Follow-These-Steps-for-a-Flawless-Professional-Profile-Picture.jpg"
+        },
+        {
+            "id": 3,
+            "name": "Bob Johnson",
+            "username": "bob.johnson789",
+            "email": "bob.johnson@newtronic.com",
+            "password": "securePassword1",
+            "image": "https://kaitlinzhang.com/wp-content/uploads/2017/05/how-to-take-a-profile-photo-personal-branding-kaitlin-zhang.jpg"
+        },
+        {
+            "id": 4,
+            "name": "Emily Brown",
+            "username": "emilybrown12",
+            "email": "emily.brown@newtronic.com",
+            "password": "letmein2023",
+            "image": "https://www.lensmen.ie/wp-content/uploads/2015/02/Profile-Portrait-Photographer-in-Dublin-Ireland..jpg"
+        },
+        {
+            "id": 5,
+            "name": "Michael Wilson",
+            "username": "michaelwilson",
+            "email": "michael.wilson@newtronic.com",
+            "password": "pass1234",
+            "image": "https://www.ninjaonlinedating.com/blog/wp-content/uploads/2019/08/BestDatingProfilePhotosForMenKRAK.jpg"
+        },
+        {
+            "id": 6,
+            "name": "Sara Davis",
+            "username": "saradavis567",
+            "email": "sara.davis@newtronic.com",
+            "password": "saraP@ss",
+            "image": "https://expertphotography.b-cdn.net/wp-content/uploads/2020/08/profile-photos-4.jpg"
+        },
+        {
+            "id": 7,
+            "name": "James Lee",
+            "username": "jameslee90",
+            "email": "james.lee@newtronic.com",
+            "password": "secretpass",
+            "image": "https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_0.jpg"
+        },
+        {
+            "id": 8,
+            "name": "Emma Hernandez",
+            "username": "emmahernandez",
+            "email": "emma.hernandez@newtronic.com",
+            "password": "mypassword123",
+            "image": "https://www.pngitem.com/pimgs/m/348-3481514_circle-profile-girl-hd-png-download.png"
+        },
+        {
+            "id": 9,
+            "name": "Daniel Taylor",
+            "username": "danieltaylor34",
+            "email": "daniel.taylor@newtronic.com",
+            "password": "d@n!elP@ss",
+            "image": "https://www.maturitydating.co.uk/wp-content/uploads/2016/09/shutterstock_341919467.jpg"
+        },
+        {
+            "id": 10,
+            "name": "Olivia Martinez",
+            "username": "oliviamartinez",
+            "email": "olivia.martinez@newtronic.com",
+            "password": "password12345",
+            "image": "https://www.hawtcelebs.com/wp-content/uploads/2011/10/Olivia-Wilde-at-In-Time-Premiere-4.jpg"
+        }
+    ]
+}
