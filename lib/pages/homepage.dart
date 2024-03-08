@@ -10,112 +10,122 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          leading: Icon(Icons.notifications,color: Colors.black,),
-        ),
         backgroundColor: Colors.white,
-        body: Center(
-
+        body: SingleChildScrollView(
           child: Column(
             children: [
+              Container(
+              ),
+              SizedBox(height: 20),
+
               Center(
                 child: MalyCard(),
               ),
               SizedBox(height: 20),
               Text(
                 'Services',
-                style: TextStyle(fontSize: 20,
-                    fontWeight: FontWeight.bold,
-
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: 10),
               Container(
                 height: 250,
+                width: 400,
                 child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 20),
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        colors: [
-                          Colors.white70,
-                          Colors.white,
-                          Colors.green,
-                          Colors.white,
-                          Colors.greenAccent,
-                        ],
-                        begin: Alignment.centerRight,
-                        end: Alignment.centerLeft,
-                      ),
-                        borderRadius: BorderRadius.only(
-                          bottomLeft:  Radius.circular(40),
-                          bottomRight:  Radius.circular(40),),
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  decoration: BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [
+                        Colors.greenAccent,
+                        Colors.green,
+                        Colors.greenAccent,
+                        Colors.green,
+                        Colors.greenAccent,
+                      ],
+                      begin: Alignment.bottomLeft,
+                      end: Alignment.topRight,
                     ),
-                    height: 250,
-                    child: Column(
-                  children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ServiceIcon(
-                    icon: Icons.qr_code,
-                    label: 'Service 1',
-                    onTap: () {
-
-                    },
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.greenAccent.withOpacity(0.5),
+                        spreadRadius: 5,
+                        blurRadius: 15,
+                        offset: Offset(0, 3),
+                      ),
+                    ],
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(40),
+                      bottomRight: Radius.circular(40),
+                    ),
                   ),
-                  ServiceIcon(
-                    icon: Icons.javascript,
-                    label: 'Service 2',
-                    onTap: () {
-                      // Handle tapping on Service 2
-                    },
+                  height: 250,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ServiceIcon(
+                            icon: Icons.attach_money_sharp,
+                            label: 'Cache',
+                            onTap: () {
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return MalyCard();
+                                },
+                              );
+                            },
+                          ),
+                          ServiceIcon(
+                            icon: Icons.shopping_cart,
+                            label: 'Shopping',
+                            onTap: () {
+                              // Handle tapping on Service 2
+                            },
+                          ),
+                          ServiceIcon(
+                            icon: Icons.phone_android,
+                            label: 'Phone',
+                            onTap: () {
+                              // Handle tapping on Service 3
+                            },
+                          ),
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ServiceIcon(
+                            icon: Icons.keyboard_double_arrow_left_sharp,
+                            label: 'Get',
+                            onTap: () {
+                              // Handle tapping on Service 4
+                            },
+                          ),
+                          ServiceIcon(
+                            icon: Icons.keyboard_double_arrow_right_rounded,
+                            label: 'Service 5',
+                            onTap: () {
+                              // Handle tapping on Service 5
+                            },
+                          ),
+                          ServiceIcon(
+                            icon: Icons.label,
+                            label: 'Service 6',
+                            onTap: () {
+                              // Handle tapping on Service 6
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
-                  ServiceIcon(
-                    icon: Icons.offline_bolt,
-                    label: 'Service 3',
-                    onTap: () {
-                      // Handle tapping on Service 3
-                    },
-                  ),
-                ],
-              ),
-
-
-              SizedBox(height: 10),
-
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  ServiceIcon(
-                    icon: Icons.u_turn_left,
-                    label: 'Service 4',
-                    onTap: () {
-                      // Handle tapping on Service 4
-                    },
-                  ),
-                  ServiceIcon(
-                    icon: Icons.kayaking,
-                    label: 'Service 5',
-                    onTap: () {
-                      // Handle tapping on Service 5
-                    },
-                  ),
-                  ServiceIcon(
-                    icon: Icons.label,
-                    label: 'Service 6',
-                    onTap: () {
-                      // Handle tapping on Service 6
-                    },
-                  ),
-                ],
-              ),
-  ]
-              )
-              ),
+                ),
               ),
             ],
-
           ),
         ),
       ),

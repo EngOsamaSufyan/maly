@@ -1,96 +1,146 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:maly/pages/buttom_navegetor_bar.dart';
-import 'package:maly/pages/homepage.dart';
+
+import 'package:maly/pages/forgetpass.dart';
+import 'package:maly/pages/singup.dart';
 
 
+class LoginScrren extends StatefulWidget {
+  const LoginScrren({super.key});
 
-class LoginScreen extends StatelessWidget {
+  @override
+  State<LoginScrren> createState() => _LoginScrrenState();
+}
+
+class _LoginScrrenState extends State<LoginScrren> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.greenAccent,
+    return SafeArea(child:  Scaffold(
 
-      body: SingleChildScrollView(
-        child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 40, vertical: 120),
+      body: Container(
+        padding: const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 3),
+        width: MediaQuery.of(context).size.width,
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
+            children: <Widget> [
+              const SizedBox(height: 20),
 
-
-              Container(
-                height: MediaQuery.of(context).size.height * 0.2,
-                width: MediaQuery.of(context).size.height * 0.2,
-                decoration: BoxDecoration(
-                  color: Colors.black, // Set your desired background color here
-                  borderRadius: BorderRadius.only(
-                    bottomLeft:  Radius.circular(40),
-                    bottomRight:  Radius.circular(40),
-                    topLeft:  Radius.circular(40),
-                    topRight:  Radius.circular(40),
-
-
-                  ),
-                ),
-                child: Image.asset(
-                  'assets/images/logo.png',
-                  fit: BoxFit.contain,
-                ),
+              Image.asset('assets/images/logo.png',
+                width: 250, height: 250,
               ),
-
-              SizedBox(height: 30),
-              Text(
-                'Login',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.blue,
-                ),
-              ),
-              SizedBox(height: 30),
-              TextFormField(
+              const SizedBox(height: 50,),
+              TextField(
                 decoration: InputDecoration(
-                  labelText: 'Username',
+                  hintText: 'User name',
                   prefixIcon: Icon(Icons.person),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius:  BorderRadius.circular(20),
+                    borderSide: const BorderSide(
+                      color: Colors.green,
+                      width: 1.0,
+                    ),
+                  ),
+                  disabledBorder: OutlineInputBorder(
+                    borderRadius:  BorderRadius.circular(20),
+                    borderSide: const BorderSide(
+                      color: Colors.green,
+                      width: 1.0,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius:  BorderRadius.circular(20),
+                    borderSide: const BorderSide(
+                      color: Colors.green,
+                      width: 1.0,
+                    ),
+                  ),
                 ),
               ),
-              SizedBox(height: 20),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Password',
-                  prefixIcon: Icon(Icons.lock),
-                ),
+              const SizedBox(height: 20,),
+              TextField(
                 obscureText: true,
-              ),
-              SizedBox(height: 40),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => ButtomBarPages()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20),
+                decoration: InputDecoration(
+                  hintText: 'Password',
+                  prefixIcon: Icon(Icons.remove_red_eye),
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius:  BorderRadius.circular(20),
+                    borderSide: const BorderSide(
+                      color: Colors.green,
+                      width: 1.0,
+                    ),
                   ),
-                  padding: EdgeInsets.symmetric(horizontal: 40, vertical: 15),
+                  disabledBorder: OutlineInputBorder(
+                    borderRadius:  BorderRadius.circular(20),
+                    borderSide: const BorderSide(
+                      color: Colors.green,
+                      width: 1.0,
+                    ),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius:  BorderRadius.circular(20),
+                    borderSide: const BorderSide(
+                      color: Colors.green,
+                      width: 1.0,
+                    ),
+                  ),
                 ),
-                child: Text(
-                  'Login',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
+              ),
+              const SizedBox(height: 45,),
+              MaterialButton(
+                  elevation: 5.0,
+                  color: Colors.green,
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 20,
+                      horizontal: 80
                   ),
+                  child: const Text('Login',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 23,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  shape: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(50),
+                      borderSide: BorderSide.none
+                  ),
+                  onPressed: (){
+                    Get.to(ButtomBarPages());
+                  }
+              ),
+              const SizedBox(height: 20,),
+              GestureDetector(
+                onTap: (){
+                  Get.to(Password());
+                                 },
+                child: Text('Forget the password'
+                    ,style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 20,
+                    )
+                ),
+              ),
+              const SizedBox(height: 10,),
+              GestureDetector(
+                onTap: (){
+                Get.to(Signup());
+                },
+                child: Text('Create Account'
+                    ,style: TextStyle(
+                      color: Colors.blue,
+                      fontSize: 20,
+                    )
                 ),
               ),
             ],
           ),
         ),
       ),
-    );
+    ));
   }
 }

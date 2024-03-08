@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:maly/pages/loginpage.dart';
 
 
@@ -12,10 +13,10 @@ class Maly extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner:false,
 
-      home:LoginScreen(),
+      home:LoginScrren(),
 
     );
   }

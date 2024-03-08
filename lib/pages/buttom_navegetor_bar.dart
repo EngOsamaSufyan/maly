@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:maly/pages/account_management_page.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar_item.dart';
 import 'homepage.dart';
@@ -20,28 +21,29 @@ class ButtomBarPages extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         home:SafeArea(child:  Scaffold(
           backgroundColor: Colors.white,
+
           body: PageView(
             controller: _pageControlller,
             children: const <Widget>[
-              SettingsPage(),
+              Setting(),
               HomePage(),
-
+              PersonalInformationPage(),
 
             ],
           ),
           extendBody: true,
           bottomNavigationBar: RollingBottomBar(
-            color: const Color.fromARGB(300, 100, 0, 0),
+            color: Colors.orangeAccent,
             controller: _pageControlller,
             flat: true,
             useActiveColorByDefault: false,
             items: const [
               RollingBottomBarItem(Icons.settings,
-                  label: 'Settengs', activeColor: Colors.blue),
-              RollingBottomBarItem(Icons.home,
-                  label: 'home', activeColor: Colors.blue),
+                  label: 'Sttings', activeColor: Colors.green),
+              RollingBottomBarItem(Icons.monetization_on_rounded,
+                  label: 'Process', activeColor: Colors.green),
               RollingBottomBarItem(Icons.person,
-                  label: 'Accaount', activeColor: Colors.blue),
+                  label: 'Accaount', activeColor: Colors.green),
             ],
             enableIconRotation: true,
             onTap: (index) {
