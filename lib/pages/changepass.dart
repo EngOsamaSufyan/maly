@@ -85,10 +85,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               height: 48,
               child: ElevatedButton(
                 onPressed: () {
+
                   // Handle change password button press
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.blue,
+                  primary: Colors.blueGrey,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -98,6 +99,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
+                    color: Colors.white
                   ),
                 ),
               ),

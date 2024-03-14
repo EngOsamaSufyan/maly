@@ -13,12 +13,10 @@ class _PayShoppingPageState extends State<PayShoppingPage> {
   String? selectedCurrency;
 
   List<String> Currency = [
-    'Electricity',
-    'Water',
-    'Telephone',
-    'Internet',
-    'Phone Credit',
-    'Purchases',
+    'RY',
+    'RS',
+    'USD',
+
   ];
 
   @override
@@ -81,7 +79,7 @@ class _PayShoppingPageState extends State<PayShoppingPage> {
             SizedBox(height: 16),
             MaterialButton(
               elevation: 5.0,
-              color: Colors.green,
+              color: Colors.blueGrey,
               padding: const EdgeInsets.symmetric(
                   vertical: 8,
                   horizontal: 30

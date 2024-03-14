@@ -119,7 +119,7 @@ class _MoneyReceivePageState extends State<MoneyReceivePage> {
               SizedBox(height: 16),
               MaterialButton(
                   elevation: 100.0,
-                  color: Colors.green,
+                  color: Colors.blueGrey,
                   padding: const EdgeInsets.symmetric(
                       vertical: 10,
                       horizontal: 50

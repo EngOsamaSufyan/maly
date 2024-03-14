@@ -8,7 +8,6 @@ import 'package:maly/pages/payshopping.dart';
 import 'package:maly/pages/pillpay.dart';
 import 'package:maly/pages/recevemoney.dart';
 import 'package:maly/pages/support.dart';
-
 import '../code/verable.dart';
 import 'otherservice.dart';
 import 'changepass.dart';
@@ -18,7 +17,7 @@ import 'loginpage.dart';
 
 
 class HomePage extends StatelessWidget {
-  Malyvarable maly =Get.put(Malyvarable());
+  LogIn maly =Get.put(LogIn());
 
 
   @override
@@ -54,6 +53,7 @@ class HomePage extends StatelessWidget {
         ),
 
         drawer: Drawer(
+          backgroundColor: Colors.white10,
 
           child:
           ListView(
@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget {
 
               Container(
                 height: 180,
-                width: 415,
+                width: 150,
                 child: Container(
                   padding: EdgeInsets.symmetric(vertical: 10),
                   decoration: BoxDecoration(
@@ -69,9 +69,9 @@ class HomePage extends StatelessWidget {
                         colors: [
                           Colors.white10,
                           Colors.white,
-                          Colors.blueGrey,
-                          Colors.blueGrey,
-                          Colors.blueGrey,
+                          Color(0xf779BFFF),
+                          Color(0xb7799FfF),
+                          Color(0xb779B89F)
                         ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
@@ -117,7 +117,7 @@ class HomePage extends StatelessWidget {
                       ),
                       SizedBox(height: 8),
 
-                      GetBuilder<Malyvarable>(
+                      GetBuilder<LogIn>(
                         builder: (maly)=>
                             Text(
                               maly.Phone.toString(),
@@ -200,37 +200,45 @@ class HomePage extends StatelessWidget {
 
         body: SingleChildScrollView(
           child: Column(
-
             children: [
+              Container(
+                height: 170,
+                width: 390,
+                child: ListView(
+                  children: [
+                    LinearProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.deepOrange),
+                      backgroundColor: Colors.transparent,
 
-              SizedBox(height: 10),
+                    ),
+                    Image.asset('assets/images/logo.png',
+                      width: 200, height: 150,
+                    ),
+                    LinearProgressIndicator(
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.deepOrange),
+                      backgroundColor: Colors.transparent,
 
-              SizedBox(height: 5,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Icon(Icons.account_balance_outlined,
-                  color: Colors.orange,
-                  )
-                ],
+                    ),
+
+                  ],
+
+                ),
+
               ),
-
               SizedBox(height: 2),
                         Container(
-                          height: 210,
+                          height: 175,
                           width: 390,
-
-                          child: ListView(
+                          child: PageView(
                             scrollDirection: Axis.horizontal,
-
                             children: [
                               MalyCard(),
-                              SizedBox(width: 10),
                               MalyCard(),
                             ],
                           ),
                           
                         ),
+
 
 
               Text(
@@ -239,7 +247,6 @@ class HomePage extends StatelessWidget {
                   fontSize: 20,
                   color: Colors.green,
                   fontWeight: FontWeight.bold,
-
 
                 ),
               ),
@@ -293,7 +300,7 @@ class HomePage extends StatelessWidget {
                       children: [
                         ServiceIconContainer(
                           icon: Icons.keyboard_double_arrow_down,
-                          label: 'Money Receve',
+                          label: 'MoneyRece',
                           onTap: () {
                             showModalBottomSheet(
                                 context: context,
@@ -330,7 +337,7 @@ class HomePage extends StatelessWidget {
                           onTap: () {
                             showModalBottomSheet(
                                 context: context,
-
+                                isScrollControlled: true,
                                 builder: (context){
                                   return Container(
                                     height: MediaQuery.of(context).size.height *1, // Set the desired height here
@@ -345,14 +352,6 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-              Divider(color: Colors.grey,),
-              IconButton(onPressed: (){
-
-              }, icon: Icon(
-                Icons.add_box,
-                color: Colors.orange,
-              ), ),
-
             ],
           ),
         ),
@@ -396,11 +395,11 @@ class ServiceIconContainer extends StatelessWidget {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
+                borderRadius:  BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20),
 
-                borderRadius:  BorderRadius.circular(30),
-
-
-
+                ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,

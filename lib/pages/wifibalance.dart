@@ -13,6 +13,7 @@ class WifiBalancePage extends StatefulWidget {
 }
 
 class _ChargeBalancePageState extends State<WifiBalancePage> {
+
   Package? _selectedPackage;
 
   List<Package> _packages = [
@@ -67,7 +68,7 @@ class _ChargeBalancePageState extends State<WifiBalancePage> {
             SizedBox(height: 32),
             MaterialButton(
               elevation: 5.0,
-              color: Colors.green,
+              color: Colors.blueGrey,
               padding: const EdgeInsets.symmetric(
                   vertical: 10,
                   horizontal: 20
@@ -89,7 +90,8 @@ class _ChargeBalancePageState extends State<WifiBalancePage> {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: Text('Confirmation'),
-                      content: Text('Are you sure you want to charge the SIM balance?'),
+                      content: Text(' Are you sure you want to charge the WiFi balance?'),
+
                       actions: <Widget>[
                         TextButton(
                           child: Text('Cancel'),

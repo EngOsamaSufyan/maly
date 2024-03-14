@@ -40,7 +40,7 @@ class Start extends StatelessWidget {
               SizedBox(height: 40),
               Text('Create an Account And Get Access to all Services...',
                 style: TextStyle(
-                    color: Colors.black
+                    color: Colors.blue
                 ),
               ),
               SizedBox(height: 60),
@@ -72,7 +72,7 @@ class Start extends StatelessWidget {
                 },
                 child: Text('Already have an account? Login',
                 style: TextStyle(
-                  color: Colors.black
+                  color: Colors.blue
                 ),
                 ),
               ),

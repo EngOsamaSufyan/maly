@@ -61,7 +61,7 @@ class _ChargeBalancePageState extends State<SimchargeBalancePage> {
             SizedBox(height: 10),
             MaterialButton(
               elevation: 5.0,
-              color: Colors.green,
+              color: Colors.blueGrey,
               padding: const EdgeInsets.symmetric(
                   vertical: 10,
                   horizontal: 20
@@ -133,7 +133,7 @@ class _ChargeBalancePageState extends State<SimchargeBalancePage> {
             SizedBox(height: 10),
             MaterialButton(
               elevation: 5.0,
-              color: Colors.green,
+              color: Colors.blueGrey,
               padding: const EdgeInsets.symmetric(
                   vertical: 10,
                   horizontal: 20
@@ -185,25 +185,22 @@ class _ChargeBalancePageState extends State<SimchargeBalancePage> {
                   color: Colors.green),
             ),
             SizedBox(height: 8),
-            DropdownButtonFormField<Package>(
-              value: _selectedPackage,
-              onChanged: (Package? newValue) {
-                setState(() {
-                  _selectedPackage = newValue;
-                });
-              },
-              items: _packages.map((Package package) {
-                return DropdownMenuItem<Package>(
-                  value: package,
-                  child: Text('${package.name} (\$${package.price.toStringAsFixed(2)})'),
-                );
-              }).toList(),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: TextFormField(
 
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Enter amount...',
+                  ),
+                ),
+              ),
             ),
             SizedBox(height: 10),
             MaterialButton(
               elevation: 5.0,
-              color: Colors.green,
+              color: Colors.blueGrey,
               padding: const EdgeInsets.symmetric(
                   vertical: 10,
                   horizontal: 20

@@ -52,8 +52,7 @@ class _BillPaymentPageState extends State<BillPaymentPage> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
 
           children: [
             SizedBox(height: 40),
@@ -180,7 +179,7 @@ class _BillPaymentPageState extends State<BillPaymentPage> {
             SizedBox(height: 20),
             MaterialButton(
               elevation: 100.0,
-              color: Colors.green,
+              color: Colors.blueGrey,
               padding: const EdgeInsets.symmetric(
                   vertical: 10,
                   horizontal: 50

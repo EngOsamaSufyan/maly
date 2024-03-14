@@ -33,10 +33,15 @@ class ComingSoonPage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 32),
-              LinearProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
-                backgroundColor: Colors.transparent,
+              Container(
+                width: 200,
+                child:LinearProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+                  backgroundColor: Colors.transparent,
+                ),
               ),
+
+
             ],
           ),
         ),

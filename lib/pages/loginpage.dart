@@ -10,7 +10,7 @@ import 'package:flutter/services.dart';
 
 
 class LoginScrren extends StatelessWidget {
-  Malyvarable maly =Get.put(Malyvarable());
+  LogIn maly =Get.put(LogIn());
   TextEditingController _accountNumber =TextEditingController();
   TextEditingController _pass =TextEditingController();
 
@@ -98,7 +98,7 @@ class LoginScrren extends StatelessWidget {
               const SizedBox(height: 45,),
               MaterialButton(
                   elevation: 5.0,
-                  color: Colors.green,
+                  color: Colors.blueGrey,
                   padding: const EdgeInsets.symmetric(
                       vertical: 10,
                       horizontal: 50
@@ -177,7 +177,7 @@ class LoginScrren extends StatelessWidget {
                                  },
                 child: Text('Forget the password'
                     ,style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.blue,
                       fontSize: 20,
                     )
                 ),

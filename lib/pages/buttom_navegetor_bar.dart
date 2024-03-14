@@ -102,7 +102,7 @@ class _ButtomBarPagesState extends State<ButtomBarPages> {
             ? Container(
           height: 200,
           width: 200,// Customize the height as needed
-          color: Colors.white,
+          color: Colors.white10,
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
 
@@ -146,7 +146,7 @@ class _ButtomBarPagesState extends State<ButtomBarPages> {
                             color: Colors.orange,
                           ),
                           onPressed: () {
-                            Get.to(SimchargeBalancePage());
+                            Get.to(ComingSoonPage());
                           },
                         )
                       ],

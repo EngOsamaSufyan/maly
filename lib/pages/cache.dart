@@ -50,7 +50,7 @@ backgroundColor:Colors.black12,
               SizedBox(height: 16),
               MaterialButton(
                 elevation: 5.0,
-                color: Colors.green,
+                color: Colors.blueGrey,
                 padding: const EdgeInsets.symmetric(
                     vertical: 8,
                     horizontal: 30
@@ -58,7 +58,7 @@ backgroundColor:Colors.black12,
                 child: const Text('Get Cache',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 23,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),

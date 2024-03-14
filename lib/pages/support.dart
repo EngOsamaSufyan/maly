@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SupportPage extends StatelessWidget {
   const SupportPage({Key? key}) : super(key: key);
+
+  void _launchUrl(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +28,7 @@ class SupportPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
-                color: Colors.green
+                color: Colors.green,
               ),
             ),
             SizedBox(height: 16),
@@ -35,7 +44,7 @@ class SupportPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                    color: Colors.green
+                  color: Colors.green,
                 ),
               ),
               subtitle: Text(
@@ -43,7 +52,7 @@ class SupportPage extends StatelessWidget {
                 style: TextStyle(fontSize: 16),
               ),
               onTap: () {
-                // Handle email tapping
+                _launchUrl('mailto:maly.wallet@gmail.com');
               },
             ),
             Divider(),
@@ -54,7 +63,7 @@ class SupportPage extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                    color: Colors.green
+                  color: Colors.green,
                 ),
               ),
               subtitle: Text(
@@ -62,36 +71,35 @@ class SupportPage extends StatelessWidget {
                 style: TextStyle(fontSize: 16),
               ),
               onTap: () {
-                // Handle phone tapping
+                _launchUrl('tel:8888400');
               },
             ),
             Divider(),
 
             SizedBox(height: 32),
             Row(
-
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Follow us',style: TextStyle(
-                  fontSize: 20,
-                  color: Colors.green
-                ),),
+                Text(
+                  'Follow us',
+                  style: TextStyle(fontSize: 20, color: Colors.green),
+                ),
                 IconButton(
                   icon: Icon(Icons.facebook),
                   onPressed: () {
-                    // Handle Facebook icon press
+                    _launchUrl('https://www.facebook.com');
                   },
                 ),
                 IconButton(
                   icon: Icon(Icons.where_to_vote),
                   onPressed: () {
-                    // Handle Twitter icon press
+                    _launchUrl('https://www.twitter.com');
                   },
                 ),
                 IconButton(
                   icon: Icon(Icons.telegram),
                   onPressed: () {
-                    // Handle Instagram icon press
+                    _launchUrl('https://www.instagram.com');
                   },
                 ),
               ],

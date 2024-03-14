@@ -31,6 +31,8 @@ dependencies:
   flutter:
     sdk: flutter
   curved_navigation_bar: ^1.0.3
+  url_launcher:
+
 
 
 
@@ -43,6 +45,8 @@ dependencies:
 
 
 dev_dependencies:
+  sqflite:
+  path:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: "^0.13.1"
@@ -66,6 +70,7 @@ flutter:
   assets:
     - assets/images/logo.png
     - assets/json/balance.json
+    - assets/json/user.json
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
