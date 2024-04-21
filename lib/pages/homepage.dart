@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:maly/pages/cache.dart';
@@ -8,25 +10,63 @@ import 'package:maly/pages/payshopping.dart';
 import 'package:maly/pages/pillpay.dart';
 import 'package:maly/pages/recevemoney.dart';
 import 'package:maly/pages/support.dart';
-import '../code/verable.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'otherservice.dart';
 import 'changepass.dart';
 import 'loginpage.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 
 
 
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
 
-class HomePage extends StatelessWidget {
-  LogIn maly =Get.put(LogIn());
+class _HomePageState extends State<HomePage> {
+  final _cardController = PageController();
+  bool _showCard = true;
+  final PageController _pageController = PageController();
+  int _currentPageIndex = 0;
+  Timer? _timer;
 
+  @override
+  void initState() {
+    super.initState();
+    _startTimer();
+  }
+
+  @override
+  void dispose() {
+    _cancelTimer();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _startTimer() {
+    _timer = Timer.periodic(Duration(seconds: 5), (_) {
+      final nextPageIndex = (_currentPageIndex + 1) % 5;
+      _pageController.animateToPage(
+        nextPageIndex,
+        duration: Duration(milliseconds: 500),
+        curve: Curves.ease,
+      );
+    });
+  }
+
+  void _cancelTimer() {
+    _timer?.cancel();
+    _timer = null;
+  }
 
   @override
   Widget build(BuildContext context) {
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
          centerTitle: true,
-          backgroundColor: Colors.white70,
+          backgroundColor: Colors.transparent,
           title:  Text('Maly',
               style:TextStyle(
                   fontSize: 20,
@@ -51,9 +91,9 @@ class HomePage extends StatelessWidget {
          ],
 
         ),
-
+backgroundColor: Colors.transparent,
         drawer: Drawer(
-          backgroundColor: Colors.white10,
+          backgroundColor: Colors.transparent,
 
           child:
           ListView(
@@ -67,26 +107,21 @@ class HomePage extends StatelessWidget {
                   decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          Colors.white10,
-                          Colors.white,
-                          Color(0xf779BFFF),
-                          Color(0xb7799FfF),
-                          Color(0xb779B89F)
+                          Color(0xf7124076),Color(0xf735374B),
                         ],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.blueGrey.withOpacity(0.5),
+                          color: Colors.white.withOpacity(0.5),
                           spreadRadius: 5,
                           blurRadius: 15,
                           offset: Offset(0, 3),
                         ),
                       ],
                       borderRadius: BorderRadius.only(
-
-                        bottomRight: Radius.circular(70),
+                        bottomLeft: Radius.circular(70),
                       )
 
                   ),
@@ -102,30 +137,27 @@ class HomePage extends StatelessWidget {
                           child: Icon(
                             Icons.person,
                             size: 40,
-                            color: Colors.grey,
+                            color: Colors.blue[900],
                           ),
                         ),
                       ),
                       SizedBox(width: 10),
                       Text(
-                        'Osama Sufyan',
+                        "Osama Sufyan" ?? 'Loading...',
                         style: TextStyle(
                           fontSize: 20,
-                          color: Colors.black,
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       SizedBox(height: 8),
-
-                      GetBuilder<LogIn>(
-                        builder: (maly)=>
                             Text(
-                              maly.Phone.toString(),
+                              "" ?? 'Loading...',
                               style: TextStyle(
                                 fontSize: 15,
                                 color: Colors.black,
                               ),
-                            ),),
+                            ),
 
                     ],
                   ),
@@ -199,48 +231,121 @@ class HomePage extends StatelessWidget {
         ),
 
         body: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
           child: Column(
             children: [
-              Container(
-                height: 170,
-                width: 390,
-                child: ListView(
-                  children: [
-                    LinearProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.deepOrange),
-                      backgroundColor: Colors.transparent,
-
-                    ),
-                    Image.asset('assets/images/logo.png',
-                      width: 200, height: 150,
-                    ),
-                    LinearProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.deepOrange),
-                      backgroundColor: Colors.transparent,
-
-                    ),
-
-                  ],
-
-                ),
-
-              ),
               SizedBox(height: 2),
-                        Container(
-                          height: 175,
-                          width: 390,
-                          child: PageView(
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              MalyCard(),
-                              MalyCard(),
-                            ],
-                          ),
-                          
+                  Visibility(
+                    visible: _showCard,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [ Container(
+                      height: 180,
+                      width:410,
+
+                      child: PageView(
+                        controller: _cardController,
+                        scrollDirection: Axis.horizontal,
+                        children: <Widget>[
+                          MalyCard(),
+                          MalyCard(),
+                        ],
+                      ),
+                    ),
+
+                   SmoothPageIndicator(
+                      controller: _cardController,
+                      count: 2,
+                      effect: ExpandingDotsEffect(activeDotColor: Colors.orangeAccent),
+
+                  ),
+                ],
+              ),),
+              SizedBox(height: 2),
+              Container(
+                height: 40,
+                width: 50,
+               margin: EdgeInsets.only( left: 360),
+                decoration: BoxDecoration(
+                  borderRadius:  BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+
+
+                  ),
+                  gradient: LinearGradient(
+                    colors: [
+                      Color(0xFFFBF3D5), Color(0x57C4E4FF),
+                      Color(0xFFf0fFFF)
+
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  ),
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+
+                    IconButton(
+                        onPressed: () {
+                          setState(() {
+                            _showCard = !_showCard;
+                          });
+                        },
+                        icon: Icon(
+                          _showCard ? Icons.visibility_rounded: Icons.visibility_off,
+                          color: Colors.orange,
                         ),
+                      ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 12,),
+          Container(
+            height: 120,
+            child: PageView(
+              scrollDirection: Axis.horizontal,
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentPageIndex = index;
+                });
+              },
+              children: [
+                Image.asset(
+                  'assets/images/logo.png',
+                  width: 200,
+                  height: 150,
+                ),
+                Image.asset(
+                  'assets/images/money-transfer (2).png',
+                  width: 200,
+                  height: 150,
+                  color: Colors.orange,
+                ),
+                Image.asset(
+                  'assets/images/payment.png',
+                  width: 200,
+                  height: 150,
+                  color: Colors.orange,
+                ),
+                Image.asset(
+                  'assets/images/money-transfer (1).png',
+                  width: 200,
+                  height: 150,
+                  color: Colors.orange,
+                ),
+                Image.asset(
+                  'assets/images/money-transfer.png',
+                  width: 200,
+                  height: 150,
+                ),
+              ],
+            ),
+          ),
 
-
-
+              SizedBox(height: 10,),
+              Divider(),
               Text(
                 'Services....',
                 style: TextStyle(
@@ -250,6 +355,7 @@ class HomePage extends StatelessWidget {
 
                 ),
               ),
+
               SizedBox(height: 10),
               Container(
 
@@ -273,6 +379,7 @@ class HomePage extends StatelessWidget {
                           icon: Icons.phone_android_sharp,
                           label: 'Telephone',
                           onTap: () {
+
                             Get.to(ComingSoonPage());
                           },
                         ),
@@ -299,7 +406,7 @@ class HomePage extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         ServiceIconContainer(
-                          icon: Icons.keyboard_double_arrow_down,
+                          icon: Icons.get_app_outlined,
                           label: 'MoneyRece',
                           onTap: () {
                             showModalBottomSheet(
@@ -315,7 +422,7 @@ class HomePage extends StatelessWidget {
                           },
                         ),
                         ServiceIconContainer(
-                          icon: Icons.keyboard_double_arrow_up,
+                          icon: Icons.send_outlined,
                           label: 'MoneyTransf',
                           onTap: () {
                             showModalBottomSheet(
@@ -349,6 +456,94 @@ class HomePage extends StatelessWidget {
                         ),
                       ],
                     ),
+                    SizedBox(height: 10,),
+                    Divider(),
+                    Text(
+                      'Last Transaction...',
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.green,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius:  BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                          topLeft:  Radius.circular(20),
+
+                        ),
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xFFFBF3D5), Color(0x57C4E4FF),
+                            Color(0xFFfffFFF)
+
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.payment,
+                          color: Colors.green,
+                        ),
+                        title: Text(
+                          'Payment Successful',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Text('Your payment of \$20 for the order was successful.'),
+                        trailing: Text(
+                          '2 days ago',
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ),
+                  SizedBox(height: 2,),
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius:  BorderRadius.only(
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20),
+                          topLeft:  Radius.circular(20),
+
+                        ),
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xFFFBF3D5), Color(0x57C4E4FF),
+                            Color(0xFFfffFFF)
+
+                          ],
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                        ),
+                      ),
+                      child: ListTile(
+                        leading: Icon(
+                          Icons.get_app_outlined,
+                          color: Colors.green,
+                        ),
+                        title: Text(
+                          'Money Receve Successful',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        subtitle: Text('Your Money Receveof \$100 for the order was successful.'),
+                        trailing: Text(
+                          '2 hoers ago',
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -360,6 +555,7 @@ class HomePage extends StatelessWidget {
 
 
   }
+
 
 }
 
@@ -378,42 +574,44 @@ class ServiceIconContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Row(
+      child: Column(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Container(
             width: 130,
-            height: 50,
+            height: 130,
             padding: EdgeInsets.symmetric(horizontal: 5),
 
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                   Color(0xFF8191ff), Color(0x5779BFFF)
+                   Color(0xFFFBF3D5), Color(0x57C4E4FF),
+                  Color(0xFF40BFFF)
 
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),
                 borderRadius:  BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
+
                   bottomRight: Radius.circular(20),
+                  topLeft: Radius.circular(20),
 
                 ),
             ),
-            child: Row(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Icon(
                   icon,
-                  size: 30,
+                  size: 50,
                   color: Colors.orange,
                 ),
                 SizedBox(height: 10),
                 Text(
                   label,
                   style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 16,
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                   ),
@@ -441,7 +639,7 @@ Widget _buildCard({
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        color: Colors.white,
+        color: Color(0xb7F7EEDD),
         child: ListTile(
           onTap: onTap,
           leading: Icon(
@@ -452,10 +650,10 @@ Widget _buildCard({
             title,
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              color: Colors.black,
+              color: Colors.white,
             ),
           ),
-          trailing: Icon(Icons.arrow_forward),
+          trailing: Icon(Icons.arrow_forward,color: Colors.orange,),
         ),
       ),);
 }

@@ -26,6 +26,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
       appBar: AppBar(
         title: Text('Change Password'),
       ),
+
       body: Container(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -43,12 +44,15 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
             TextFormField(
               controller: _currentPasswordController,
               obscureText: true,
-              style: TextStyle(fontSize: 18),
+
+              style: TextStyle(fontSize: 18,
+
+              ),
               decoration: InputDecoration(
                 labelText: 'Current Password',
-                prefixIcon: Icon(Icons.lock),
+                prefixIcon: Icon(Icons.lock,color: Colors.orange,),
                 border: OutlineInputBorder(borderRadius: BorderRadius.all(
-                    Radius.circular(10)
+                    Radius.circular(30)
                 )),
               ),
             ),
@@ -59,10 +63,10 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               style: TextStyle(fontSize: 18),
               decoration: InputDecoration(
                 labelText: 'New Password',
-                prefixIcon: Icon(Icons.lock_outline),
+                prefixIcon: Icon(Icons.lock_outline,color: Colors.orange,),
 
                 border: OutlineInputBorder(borderRadius: BorderRadius.all(
-                    Radius.circular(10)
+                    Radius.circular(30)
                 )),
               ),
             ),
@@ -73,9 +77,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               style: TextStyle(fontSize: 18),
               decoration: InputDecoration(
                 labelText: 'Confirm Password',
-                prefixIcon: Icon(Icons.lock_outline),
+
+                prefixIcon: Icon(Icons.lock_outline,color: Colors.orange,),
                 border: OutlineInputBorder(borderRadius: BorderRadius.all(
-                  Radius.circular(10)
+                  Radius.circular(30),
+
                 )),
               ),
             ),
@@ -89,9 +95,9 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   // Handle change password button press
                 },
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.blueGrey,
+                  primary: Colors.orange[900],
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(30),
                   ),
                 ),
                 child: Text(

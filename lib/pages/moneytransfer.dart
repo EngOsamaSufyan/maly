@@ -27,8 +27,9 @@ class _MoneyTransferPageState extends State<MoneyTransferPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      backgroundColor:Colors.black12,
+      backgroundColor:Colors.blue[900],
       body: Center(
         child: Padding(
           padding: EdgeInsets.all(16.0),
@@ -156,7 +157,7 @@ class _MoneyTransferPageState extends State<MoneyTransferPage> {
               SizedBox(height: 16),
               MaterialButton(
                 elevation: 100.0,
-                color: Colors.blueGrey,
+                color: Colors.orange[900],
                 padding: const EdgeInsets.symmetric(
                     vertical: 10,
                     horizontal: 50
@@ -178,8 +179,28 @@ class _MoneyTransferPageState extends State<MoneyTransferPage> {
                   // Process the received money
                   String account = accountController.text;
                   String amount = amountController.text;
-                  // Add your logic here for processing the received money
 
+                  if (
+                  account.isEmpty ||
+                      amount.isEmpty
+                  ) {
+                    // Display an error dialog if any field is empty or any image is missing
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Icon(Icons.error,color: Colors.red,size: 30,),
+                          content: Text('Please fill in all fields .'),
+                        );
+                      },
+                    );
+                    return; // Exit the function early if there is an error
+                  }
+
+                  setState(() {
+                    accountController .clear();
+                    amountController.clear();
+                  });
                   // Show a dialog or snackbar to indicate success
                   showDialog(
                     context: context,
@@ -190,20 +211,39 @@ class _MoneyTransferPageState extends State<MoneyTransferPage> {
                         actions: [
                           TextButton(
                             onPressed: () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.white,
+                                  behavior: SnackBarBehavior.floating,
+                                  content:Row(
+                                    children: [
+                                      Icon(Icons.send_outlined,color: Colors.orange,),
+                                    SizedBox(width:20),
+                                      Text('Money has Transfered, loading...',
+                                      style: TextStyle(
+                                        color: Colors.black
+                                      ),
+                                      ),
+                                    ],
+                                  ),
+                                  action: SnackBarAction(
+                                    label: 'Secusess',
+                                    onPressed: () {
+                                      // Some code to undo the change
+                                    },
+                                  ),
+                                ),
+                              );
                               Navigator.of(context).pop();
                             },
-                            child: Text('OK'),
+                      child: Text('OK'),
                           ),
                         ],
                       );
                     },
                   );
                 },
-
               ),
-
-
-
             ],
           ),
         ),

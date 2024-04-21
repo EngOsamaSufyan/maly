@@ -34,6 +34,29 @@ class _BillPaymentPageState extends State<BillPaymentPage> {
           actions: [
             TextButton(
               onPressed: () {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: Colors.white,
+                    behavior: SnackBarBehavior.floating,
+                    content:Row(
+                      children: [
+                        Icon(Icons.send_outlined,color: Colors.orange,),
+                        SizedBox(width:20),
+                        Text('Money has Transfered, loading...',
+                          style: TextStyle(
+                              color: Colors.black
+                          ),
+                        ),
+                      ],
+                    ),
+                    action: SnackBarAction(
+                      label: 'Secusess',
+                      onPressed: () {
+                        // Some code to undo the change
+                      },
+                    ),
+                  ),
+                );
                 Navigator.pop(context); // Close the dialog
               },
               child: Text('OK'),
@@ -47,7 +70,7 @@ class _BillPaymentPageState extends State<BillPaymentPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Colors.black12,
+      backgroundColor:Colors.blue[900],
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -179,7 +202,7 @@ class _BillPaymentPageState extends State<BillPaymentPage> {
             SizedBox(height: 20),
             MaterialButton(
               elevation: 100.0,
-              color: Colors.blueGrey,
+              color: Colors.orange[900],
               padding: const EdgeInsets.symmetric(
                   vertical: 10,
                   horizontal: 50

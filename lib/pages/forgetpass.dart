@@ -97,9 +97,14 @@ class ForgotPasswordPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50),
                     borderSide: BorderSide.none
                 ),
-                onPressed: (){
+              onPressed: () {
+               SnackBar(
+                  content: Text('This is a notification.'),
+                  duration: Duration(seconds: 3),
+                 backgroundColor: Colors.blue,
 
-                }
+                );
+              },
             ),
 
 

@@ -31,9 +31,6 @@ dependencies:
   flutter:
     sdk: flutter
   curved_navigation_bar: ^1.0.3
-  url_launcher:
-
-
 
 
 
@@ -42,7 +39,12 @@ dependencies:
   cupertino_icons: ^1.0.2
   get:
   rolling_bottom_bar: ^0.2.2
-
+  url_launcher: ^6.2.5
+  image_picker:
+  smooth_page_indicator:
+  loading_animation_widget:
+  video_player:
+  chewie:
 
 dev_dependencies:
   sqflite:
@@ -54,7 +56,7 @@ dev_dependencies:
 flutter_launcher_icons:
     android: "launcher_icon"
     ios: true
-    image_path: "assets/images/logo.png"
+    image_path: "assets/images/maly.png"
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -69,8 +71,15 @@ flutter_lints: ^2.0.0
 flutter:
   assets:
     - assets/images/logo.png
-    - assets/json/balance.json
-    - assets/json/user.json
+    - assets/images/maly.png
+    - assets/images/money-transfer (2).png
+    - assets/images/money-transfer.png
+    - assets/images/money-transfer (1).png
+    - assets/images/payment.png
+    - assets/images/clash.png
+    - assets/images/pubg.png
+    - assets/images/freefir.png
+    - assets/images/netflex.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

@@ -1,34 +1,63 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 
-import 'otherservice.dart';
-import 'homepage.dart';
+import '../maly_db/db.dart';
 
-class nav extends StatefulWidget {
-  const nav({super.key});
 
+class UsersScreen extends StatefulWidget {
   @override
-  State<nav> createState() => _navState();
+  _UsersScreenState createState() => _UsersScreenState();
 }
 
-class _navState extends State<nav> {
+class _UsersScreenState extends State<UsersScreen> {
+  List<Map<String, dynamic>> _users = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchUsers();
+  }
+
+  Future<void> _fetchUsers() async {
+    final users = await MyDatabase.getUsers();
+    setState(() {
+      _users = users;
+    });
+  }
+
+// ...
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      bottomNavigationBar: CurvedNavigationBar(
-        backgroundColor: Colors.greenAccent,
-        color: Colors.green,
-        animationDuration: Duration(milliseconds: 200),
-        onTap: (index){
-
-        },
-        items: [
-          Icon(Icons.home),
-          Icon(Icons.home),
-          Icon(Icons.home),
-        ],
+      appBar: AppBar(
+        title: Text('Users'),
       ),
+      body:
+          ListView.builder(
+            itemCount: _users.length,
+            itemBuilder: (context, index) {
+              final user = _users[index];
+              return ListTile(
+                title: Text(user['name']),
+                subtitle: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Number: ${user['number']}'),
+                    Text('Personal Card: ${user['personalCard']}'),
+                    Text('Password: ${user['password']}'),
+                    Text('Photo 1: ${user['photo1']}'),
+                    Text('Photo 2: ${user['photo2']}'),
+                    Text('Photo 3: ${user['photo3']}'),
+                  // Define a TextEditingController for the user ID input
+
+
+                  ],
+                ),
+              );
+            },
+          ),
+
+
     );
   }
 }

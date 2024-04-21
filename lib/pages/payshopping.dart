@@ -9,6 +9,7 @@ class PayShoppingPage extends StatefulWidget {
 
 class _PayShoppingPageState extends State<PayShoppingPage> {
   final TextEditingController amountController = TextEditingController();
+  final TextEditingController accountController = TextEditingController();
 
   String? selectedCurrency;
 
@@ -22,7 +23,7 @@ class _PayShoppingPageState extends State<PayShoppingPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:Colors.black12,
+      backgroundColor:Colors.transparent,
       body: Padding(
         padding: EdgeInsets.all(10.0),
         child: Column(
@@ -35,6 +36,7 @@ class _PayShoppingPageState extends State<PayShoppingPage> {
             ),
             SizedBox(height: 16.0),
             TextFormField(
+              controller: accountController,
               decoration:  InputDecoration(
                 labelText: 'Account Number',
                 icon: Icon(Icons.account_balance_outlined),
@@ -46,6 +48,7 @@ class _PayShoppingPageState extends State<PayShoppingPage> {
                 SizedBox(width: 16.0),
                 Expanded(
                   child: TextFormField(
+                    controller: accountController,
                     decoration: InputDecoration(
                       labelText: 'Amount',
                       icon: Icon(Icons.numbers),
@@ -79,7 +82,7 @@ class _PayShoppingPageState extends State<PayShoppingPage> {
             SizedBox(height: 16),
             MaterialButton(
               elevation: 5.0,
-              color: Colors.blueGrey,
+              color: Colors.orange[900],
               padding: const EdgeInsets.symmetric(
                   vertical: 8,
                   horizontal: 30
@@ -98,10 +101,21 @@ class _PayShoppingPageState extends State<PayShoppingPage> {
               onPressed: () {
                 // Process the cash withdrawal
                 String amount = amountController.text;
-                // Add your logic here for processing the cash withdrawal
+                String account = amountController.text;
+                if (amount.isEmpty||account.isEmpty) {
+    // Display an error dialog if any field is empty or any image is missing
+            showDialog(
 
-                // Show a dialog or snackbar to indicate success
-                showDialog(
+            context: context,
+            builder: (BuildContext context) {
+            return AlertDialog(
+            title: Icon(Icons.error,color: Colors.red,size: 50,),
+            content: Text('Please Fill All filed...! .'),
+            );
+            },
+            );}
+            else{
+      showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
@@ -110,6 +124,29 @@ class _PayShoppingPageState extends State<PayShoppingPage> {
                       actions: [
                         TextButton(
                           onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.white,
+                                behavior: SnackBarBehavior.floating,
+                                content:Row(
+                                  children: [
+                                    Icon(Icons.send_outlined,color: Colors.orange,),
+                                    SizedBox(width:20),
+                                    Text('Money has Transfered, loading...',
+                                      style: TextStyle(
+                                          color: Colors.black
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                action: SnackBarAction(
+                                  label: 'Secusess',
+                                  onPressed: () {
+                                    // Some code to undo the change
+                                  },
+                                ),
+                              ),
+                            );
                             Navigator.of(context).pop();
                           },
                           child: Text('OK'),
@@ -117,7 +154,7 @@ class _PayShoppingPageState extends State<PayShoppingPage> {
                       ],
                     );
                   },
-                );
+                );}
               },
 
             ),

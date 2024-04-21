@@ -13,6 +13,7 @@ class WifiBalancePage extends StatefulWidget {
 }
 
 class _ChargeBalancePageState extends State<WifiBalancePage> {
+  final TextEditingController _wifiidController = TextEditingController();
 
   Package? _selectedPackage;
 
@@ -29,8 +30,10 @@ class _ChargeBalancePageState extends State<WifiBalancePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
         title: Text(' Charge WiFi Entrnet'),
       ),
+      backgroundColor: Colors.white,
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
@@ -39,8 +42,23 @@ class _ChargeBalancePageState extends State<WifiBalancePage> {
 
             SizedBox(height: 16),
             TextFormField(
+              controller: _wifiidController,
               decoration: InputDecoration(
                 labelText: 'WiFi ID',
+                labelStyle: TextStyle(
+                  color: Colors.black, // Customize the label text color
+                  fontSize: 16, // Customize the label text size
+                  fontWeight: FontWeight.bold, // Customize the label text weight
+                ),
+
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Colors.white, // Customize the focused border color
+                    width: 2.0, // Customize the focused border width
+                  ),
+                ),
+                filled: true,
+                fillColor: Colors.white10, // Customize the text field background color
               ),
             ),
 
@@ -68,7 +86,7 @@ class _ChargeBalancePageState extends State<WifiBalancePage> {
             SizedBox(height: 32),
             MaterialButton(
               elevation: 5.0,
-              color: Colors.blueGrey,
+              color: Colors.orange[900],
               padding: const EdgeInsets.symmetric(
                   vertical: 10,
                   horizontal: 20
@@ -85,12 +103,36 @@ class _ChargeBalancePageState extends State<WifiBalancePage> {
                   borderSide: BorderSide.none
               ),
               onPressed: () {
+                String wifiid = _wifiidController.text;
+
+                if (
+                wifiid.isEmpty
+                ) {
+                  // Display an error dialog if any field is empty or any image is missing
+                  showDialog(
+
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Icon(Icons.error,color: Colors.red,size: 30,),
+                        content: Text('Please fill in all fields .'),
+                      );
+                    },
+                  );
+                  return; // Exit the function early if there is an error
+                }
+
+                setState(() {
+                  _wifiidController .clear();
+
+                });
                 showDialog(
                   context: context,
                   builder: (BuildContext context) {
                     return AlertDialog(
+
                       title: Text('Confirmation'),
-                      content: Text(' Are you sure you want to charge the WiFi balance?'),
+                      content: Text(' Are you sure you want to charge the WiFi balance To : $wifiid'),
 
                       actions: <Widget>[
                         TextButton(

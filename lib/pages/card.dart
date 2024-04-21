@@ -1,87 +1,64 @@
 import 'package:flutter/material.dart';
+import '../model/get_info_from_db.dart';
+import 'loginpage.dart';
 import 'package:get/get.dart';
-import 'package:flutter/services.dart' show rootBundle;
-import 'dart:convert';
-import '../model/balance_model.dart';
+import '../maly_db/db.dart';
 import 'dart:async' show Future;
 
 
 class MalyCard extends StatefulWidget {
+
   @override
   State<MalyCard> createState() => _MalyCardState();
 }
 
 class _MalyCardState extends State<MalyCard> {
+  Getinfo getinfo =Get.put(Getinfo());
   bool isBalanceVisible = false;
+String? name;
+String? number;
+String? balance;
+
+  List<Map<String, dynamic>> _users = [];
+  @override
+  void initState() {
+    super.initState();
+    _fetchUsers();
+  }
+  Future<void> _fetchUsers() async {
+    final users = await MyDatabase.getUsers();
+    setState(() {
+      _users = users;
+    });
+  }
 
   void toggleBalanceVisibility() {
     setState(() {
       isBalanceVisible = !isBalanceVisible;
     });
   }
-   List<MalyCard> data = [];
-  String? name;
-  String? number;
-  String? balance;
-  String? expires;
-
-  @override
-  void initState() {
-    super.initState();
-    _loadJsonData();
-  }
-
-  // Future<String>_readjson()async{
-  //     String jsonData = await rootBundle.loadString('assets/json/balance.json');
-  //     return jsonData ;
-  // }
-  // Future<List<CardModel>>   _parsejson(String jsonString)async{
-  //   final jsonData = json.decode(jsonString)as List<dynamic>;
-  //   final objects = jsonData .map((e)=>CardModel.fromJson(e as Map<String,dynamic>)).toList();
-  //   return objects;
-  // }
-  // Future <void>_loddata ()async{
-  //   String jsonString =await _readjson();
-  //   Map<String,dynamic>jsonData =(await _parsejson(jsonString)) as Map<String, dynamic>;
-  //   setState(() {
-  //     name=jsonData['card_name'];
-  //     number=jsonData['card_number'];
-  //     balance=jsonData['balance'];
-  //     expires=jsonData['expiry_date'];
-  //
-  //   });
-  // }
-  Future<void> _loadJsonData() async {
-    String jsonData = await rootBundle.loadString('assets/json/balance.json');
-    Map<String, dynamic> jsonMap = jsonDecode(jsonData);
-    List<dynamic> dataList = jsonMap['data'];
-    List<CardModel> cardList =
-    dataList.map((json) => CardModel.fromJson(json)).toList();
-
-    setState(() {
-      data = cardList.cast<MalyCard>();
-      name = cardList.isNotEmpty ? cardList[0].cardName : null;
-      number = cardList.isNotEmpty ? cardList[0].cardNumber : null;
-      balance = cardList.isNotEmpty ? cardList[0].balance.toString() : null;
-      expires = cardList.isNotEmpty ? cardList[0].expiryDate : null;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
+   final user =_users[2];
+    name = user['name'];
+    number = user['number'];
+
 
     return Container(
-      width: 390,
-      height: 150,
+      width: 350,
+      height: 130,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(20),
+          topLeft: Radius.circular(20),
+          bottomLeft: Radius.circular(20)
+
+        ),
         gradient: LinearGradient(
           colors: [
-            Colors.white10,
-            Colors.white,
-            Color(0xf779BFFF),
-            Color(0xb7799FfF),
-            Color(0xb779B89F)
+            Color(0xFFFBF3D5), Color(0x57C4E4FF)
+
           ],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
@@ -103,7 +80,7 @@ class _MalyCardState extends State<MalyCard> {
                 SizedBox(height: 20),
 
                 Text(
-                  number ?? 'Loading...', // Show loading indicator if number is null
+                number ?? 'Loading...', // Show loading indicator if number is null
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
@@ -166,4 +143,5 @@ class _MalyCardState extends State<MalyCard> {
       ),
     );
   }
+
 }

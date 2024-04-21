@@ -10,24 +10,14 @@ class _MoneyReceivePageState extends State<MoneyReceivePage> {
 
   final TextEditingController amountController = TextEditingController();
 
-  String? selectedCurrency;
 
 
-
-  List<String> Currency = [
-    'Electricity',
-    'Water',
-    'Telephone',
-    'Internet',
-    'Phone Credit',
-    'Purchases',
-  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
 
-      backgroundColor:Colors.black12,
+      backgroundColor:Colors.blue[900],
       body: Center(
         child: Padding(
           padding: EdgeInsets.all(20.0),
@@ -60,20 +50,27 @@ class _MoneyReceivePageState extends State<MoneyReceivePage> {
                 ),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child:   DropdownButton<String>(
-                    hint: Text('Select a Currency'),
-                    value: selectedCurrency,
-                    onChanged: (newValue) {
-                      setState(() {
-                        selectedCurrency = newValue;
-                      });
-                    },
-                    items: Currency.map((service) {
-                      return DropdownMenuItem<String>(
-                        value: service,
-                        child: Text(service),
-                      );
-                    }).toList(),
+                  child:   Row(
+                    children: [
+                      IconButton(
+                        icon: Icon(Icons.numbers),
+                        onPressed: () {
+                          // Handle search button click
+                        },
+                      ),
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: TextFormField(
+                            controller: amountController,
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                              hintText: 'Amonts...',
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ),
@@ -119,7 +116,7 @@ class _MoneyReceivePageState extends State<MoneyReceivePage> {
               SizedBox(height: 16),
               MaterialButton(
                   elevation: 100.0,
-                  color: Colors.blueGrey,
+                  color: Colors.orange[900],
                   padding: const EdgeInsets.symmetric(
                       vertical: 10,
                       horizontal: 50
@@ -141,10 +138,20 @@ class _MoneyReceivePageState extends State<MoneyReceivePage> {
                       // Process the received money
                       String account = accountController.text;
                       String amount = amountController.text;
-                      // Add your logic here for processing the received money
+              if (amount.isEmpty||account.isEmpty) {
+              // Display an error dialog if any field is empty or any image is missing
+              showDialog(
 
-                      // Show a dialog or snackbar to indicate success
-                      showDialog(
+              context: context,
+              builder: (BuildContext context) {
+              return AlertDialog(
+              title: Icon(Icons.error,color: Colors.red,size: 50,),
+              content: Text('Please Fill All filed...! .'),
+              );
+              },
+              );}
+              else{
+                showDialog(
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
@@ -153,6 +160,29 @@ class _MoneyReceivePageState extends State<MoneyReceivePage> {
                             actions: [
                               TextButton(
                                 onPressed: () {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(
+                                      backgroundColor: Colors.white,
+                                      behavior: SnackBarBehavior.floating,
+                                      content:Row(
+                                        children: [
+                                          Icon(Icons.send_outlined,color: Colors.orange,),
+                                          SizedBox(width:20),
+                                          Text('Money has Transfered, loading...',
+                                            style: TextStyle(
+                                                color: Colors.black
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      action: SnackBarAction(
+                                        label: 'Secusess',
+                                        onPressed: () {
+                                          // Some code to undo the change
+                                        },
+                                      ),
+                                    ),
+                                  );
                                   Navigator.of(context).pop();
                                 },
                                 child: Text('OK'),
@@ -160,7 +190,7 @@ class _MoneyReceivePageState extends State<MoneyReceivePage> {
                             ],
                           );
                         },
-                      );
+                      );}
                     },
 
               ),

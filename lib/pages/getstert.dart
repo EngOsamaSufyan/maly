@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import 'package:maly/code/verable.dart';
-import 'package:maly/pages/buttom_navegetor_bar.dart';
-
-import 'package:maly/pages/forgetpass.dart';
 import 'package:maly/pages/loginpage.dart';
 import 'package:maly/pages/singup.dart';
+
+import 'buttom_navegetor_bar.dart';
 
 
 class Start extends StatelessWidget {
@@ -16,6 +14,7 @@ class Start extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child:  Scaffold(
+backgroundColor:Colors.blue[900],
 
       body: Container(
         padding: const EdgeInsets.symmetric(
@@ -46,7 +45,7 @@ class Start extends StatelessWidget {
               SizedBox(height: 60),
               MaterialButton(
                   elevation: 5.0,
-                  color: Colors.blueGrey,
+                  color: Colors.orange[900],
                   padding: const EdgeInsets.symmetric(
                       vertical: 20,
                       horizontal: 80

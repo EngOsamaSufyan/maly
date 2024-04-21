@@ -18,6 +18,7 @@ class SupportPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Support'),
       ),
+
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -51,8 +52,19 @@ class SupportPage extends StatelessWidget {
                 'maly.wallet@gmail.com',
                 style: TextStyle(fontSize: 16),
               ),
-              onTap: () {
-                _launchUrl('mailto:maly.wallet@gmail.com');
+              onTap: () async {
+
+                final Uri url=Uri(
+                    scheme: 'mailto',
+                    path: 'maly.wallet@gmail.com'
+
+                );
+                if(await canLaunchUrl(url)){
+                await launchUrl(url);
+                }
+                else
+                print('no Call');
+
               },
             ),
             Divider(),
@@ -70,8 +82,18 @@ class SupportPage extends StatelessWidget {
                 '8888400',
                 style: TextStyle(fontSize: 16),
               ),
-              onTap: () {
-                _launchUrl('tel:8888400');
+              onTap: () async {
+                final Uri url=Uri(
+                  scheme: 'tel',
+                  path: '8888400'
+
+                );
+                if(await canLaunchUrl(url)){
+                  await launchUrl(url);
+                }
+                else
+                  print('no Call');
+
               },
             ),
             Divider(),
@@ -86,20 +108,54 @@ class SupportPage extends StatelessWidget {
                 ),
                 IconButton(
                   icon: Icon(Icons.facebook),
-                  onPressed: () {
-                    _launchUrl('https://www.facebook.com');
+                  onPressed: ()async {
+
+                    final Uri url=Uri(
+                        scheme: 'https',
+                        path: 'www.facebook.com'
+
+                    );
+                    if(await canLaunchUrl(url)){
+                      await launchUrl(url);
+                    }
+                    else
+                      print('no Call');
+
                   },
                 ),
                 IconButton(
                   icon: Icon(Icons.where_to_vote),
-                  onPressed: () {
-                    _launchUrl('https://www.twitter.com');
+                  onPressed: ()async {
+
+                    final Uri url=Uri(
+                        scheme: 'https',
+                        path: 'www.twitter.com'
+
+                    );
+                    if(await canLaunchUrl(url)){
+                      await launchUrl(url);
+                    }
+                    else
+                      print('no Call');
+
                   },
                 ),
                 IconButton(
                   icon: Icon(Icons.telegram),
-                  onPressed: () {
-                    _launchUrl('https://www.instagram.com');
+                  onPressed: () async {
+
+                    final Uri url=Uri(
+                        scheme: 'https',
+                        path: 'www.instagram.com'
+
+                    );
+                    if(await canLaunchUrl(url)){
+                    await launchUrl(url);
+                    }
+                    else
+                    print('no Call');
+
+
                   },
                 ),
               ],

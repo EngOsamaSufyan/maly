@@ -6,6 +6,7 @@ import 'package:maly/pages/simchargebalance.dart';
 import 'package:maly/pages/wifibalance.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar.dart';
 import 'package:rolling_bottom_bar/rolling_bottom_bar_item.dart';
+import 'gimaingservece.dart';
 import 'homepage.dart';
 
 
@@ -30,18 +31,30 @@ class _ButtomBarPagesState extends State<ButtomBarPages> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+backgroundColor: Colors.transparent,
+        body: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [ Color(0xf7124076),Color(0xf735374B),
+              ],
+            ),
+          ),
+          child: PageView(
+            controller: _pageController,
+            children:  <Widget>[
+              HomePage(),
+              GamingServicePage()
 
-        body: PageView(
-          controller: _pageController,
-          children:  <Widget>[
-            HomePage(),
-            ComingSoonPage()
-
-          ],
+            ],
+          ),
         ),
+
         extendBody: true,
         bottomNavigationBar: RollingBottomBar(
-          color: Color(0x5779BFFF),
+
+          color: Color(0xb7FFEDD8),
           controller: _pageController,
           flat: true,
           useActiveColorByDefault: false,
@@ -49,13 +62,13 @@ class _ButtomBarPagesState extends State<ButtomBarPages> {
             RollingBottomBarItem(
               Icons.home_sharp,
               label: 'Home',
-              activeColor: Colors.blue,
+              activeColor: Colors.orange,
             ),
 
             RollingBottomBarItem(
               Icons.videogame_asset,
               label: 'Geming',
-              activeColor: Colors.blue,
+              activeColor: Colors.orange,
 
             ),
           ],
@@ -77,7 +90,7 @@ class _ButtomBarPagesState extends State<ButtomBarPages> {
         ),
         floatingActionButton: _showContainer
             ? FloatingActionButton(
-          backgroundColor: Colors.white70,
+          backgroundColor: Colors.blueGrey[600],
           onPressed: () {
             setState(() {
               _showContainer = false;
@@ -89,7 +102,7 @@ class _ButtomBarPagesState extends State<ButtomBarPages> {
           ),
         )
             : FloatingActionButton(
-          backgroundColor: Colors.white70,
+          backgroundColor: Colors.blueGrey[700],
           onPressed: () {
             setState(() {
               _showContainer = true;
@@ -102,7 +115,7 @@ class _ButtomBarPagesState extends State<ButtomBarPages> {
             ? Container(
           height: 200,
           width: 200,// Customize the height as needed
-          color: Colors.white10,
+          color: Colors.transparent,
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
 

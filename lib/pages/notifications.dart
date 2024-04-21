@@ -9,6 +9,7 @@ class NotificationsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Notifications'),
       ),
+
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: 16.0),
         children: [
